@@ -1,0 +1,7 @@
+{
+    "uid": "nodeparser",
+    "append": true,
+    "watch": true,
+    "script": "dist/app.js",
+    "sourceDir": "/home/jelastic/ROOT"
+}

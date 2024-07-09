@@ -1,0 +1,19 @@
+{
+  "web": {
+    "user_id": "schedy80@gmail.com",
+    "client_id": "25012451572-j50j8eocst4cmt56q9ru9i779nin50s8.apps.googleusercontent.com",
+    "project_id": "gmailfetchapi",
+    "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+    "token_uri": "https://oauth2.googleapis.com/token",
+    "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+    "client_secret": "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",
+    "redirect_uris": [
+      "https://developers.google.com/oauthplayground/"
+    ],
+    "access_token": "ya29.a0AfB_byB5s3x8eRWh430IuHAiJrShW_NPWRKu5dQtMSmKaeIuzcIPgbIu30WRWhSN9Xj8rn9SxZBQ_FSXFHpOQ5Ee2MBtS6PFGXQx0JSOaKVJWrhMvpVfe2PvApmQHzeqeoNc4ELnayjp84lgG6re4HESXrNl_bWkKYIdaCgYKASASARASFQHGX2Midbj1oOyy52oyIXzUiUasMA0171",
+    "scope": "https://mail.google.com/",
+    "token_type": "Bearer",
+    "expires_in": 3599,
+    "refresh_token": "1//04TNrDOKiKYY_CgYIARAAGAQSNwF-L9IrqaWMDakLjUp7UEaUciHO5rEonbJ9EOwiXnnHWic2O6kbhbiRebl16g-FNXTQxSyLyLw"
+  }
+}

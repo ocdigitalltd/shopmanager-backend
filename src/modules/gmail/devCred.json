@@ -1,0 +1,19 @@
+{
+    "web": {
+      "user_id": "localdev899@gmail.com",
+      "client_id": "1034655570427-d3oerf1bsed503rcidluq5b04d828de9.apps.googleusercontent.com",
+      "project_id": "gmailfetchapi",
+      "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+      "token_uri": "https://oauth2.googleapis.com/token",
+      "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+      "client_secret": "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",
+      "redirect_uris": [
+        "https://developers.google.com/oauthplayground/"
+      ],
+      "access_token":"ya29.a0Ad52N39rwJGe9wE43-mcG1h75Nbn49MOSnm3tk5-nLRceFzs4Y5emKR7Sav77O7YpE-ATYo1ZSREZ9Ul4I_B4IP7VGqeYN-Ut-LroI2magR1WQL2XR20iuOTIFLaTL7X7IPvQux8ePjp6032543pNIKaheDm-Unyu2KeaCgYKAdwSARISFQHGX2Mi656eyJ7fXBXjqTaL9id4JQ0171",
+      "scope": "https://mail.google.com/",
+      "token_type": "Bearer",
+      "expires_in": 3599,
+      "refresh_token": "1//04tVqB4qvcNHcCgYIARAAGAQSNwF-L9IrOE1ZzV0v-_B_moNLeD95aPkp0o6RZWlujoWYI2C0rzrpg3asRdoXcVigDg-HdJaaMnE"
+    }
+  }

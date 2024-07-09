@@ -1,0 +1,19 @@
+{
+  "web": {
+    "user_id": "schedy80@gmail.com",
+    "client_id": "25012451572-tnu5l3jcdmic342ur0f05puf3a3tje48.apps.googleusercontent.com",
+    "project_id": "moonlit-cistern-417115",
+    "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+    "token_uri": "https://oauth2.googleapis.com/token",
+    "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+    "client_secret": "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",
+    "redirect_uris": [
+      "https://developers.google.com/oauthplayground"
+    ],
+    "access_token": "ya29.a0Ad52N38RD0tZwwnbBc42L0-MZeu9J8BlR9WO3WXownXXiydvyuTrEkjCKu5oGs4J3SbBGvurmfZZF8k2JRTEBtxSX7YV_ycT_OfU5vYGBgrOQK4e2OEkpVI5VKCgWpO8gMGZRkaAXIUC7JbaWBoQOThmZP6OnqepV-81aCgYKAVcSARASFQHGX2MirRwgdTSBL86CHZNuBNwbeQ0171",
+    "scope": "https://www.googleapis.com/auth/spreadsheets",
+    "token_type": "Bearer",
+    "expires_in": 3599,
+    "refresh_token": "1//041I0f-jY3xKeCgYIARAAGAQSNwF-L9IrxL6vAErmMT-lYqFYT43UH5X1uYUTGYQUWmAfOT8vFnCD7u-xthR4722sd0Ckpuq83C0"
+  }
+}

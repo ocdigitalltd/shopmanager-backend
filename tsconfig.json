@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "target": "es2015",
+    "module": "commonjs",
+    "outDir": "dist",
+    "typeRoots": ["./@types", "./node_modules/@types"],
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "resolveJsonModule": true,
+  },
+  "include": ["src/**/*"],
+  "exclude": ["./@types", "./node_modules"]
+}
