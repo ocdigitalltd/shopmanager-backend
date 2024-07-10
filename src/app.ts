@@ -3,7 +3,7 @@ import bodyParser from "body-parser";
 import AppRouter from "./appRoutes";
 import { Env } from "./base/loaders/appLoader";
 import knex from "./base/database/cfgKnex";
-import { fixExistingDomainsLandingUrls, initializeDomainsInfoInMemory } from "./modules/misprintedCards/srMisprintedCards";
+import { initializeDomainsInfoInMemory } from "./modules/misprintedCards/srMisprintedCards";
 
 const expressApp = express();
 
@@ -71,9 +71,9 @@ const connectionPromise = knex.transaction(async (trx) => {
 connectionPromise
   .then(() => {
     expressApp.emit("ready");
-    fixExistingDomainsLandingUrls().then(() => {
-      console.log("done fixing")
-    })
+    // fixExistingDomainsLandingUrls().then(() => {
+    //   console.log("done fixing")
+    // })
   })
   .catch((error) => {
     console.error("Error checking database connection:", error);
