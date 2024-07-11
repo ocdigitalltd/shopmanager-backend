@@ -8,7 +8,9 @@ abstract class prodEnv extends CfgDevelopmentEnv {
     "https://shop-manager.schedy.app/",
     "https://shop-manager.schedy.app",
     "https://node209305-shop-manager.in1.cloudjiffy.net/",
-    "https://node209305-shop-manager.in1.cloudjiffy.net"
+    "https://node209305-shop-manager.in1.cloudjiffy.net",
+    "https://shopmanager.in1.cloudjiffy.net",
+    "http://shopmanager.in1.cloudjiffy.net"
   ];
 
   static MAP_API_TOKEN = "651d156bca96aa7a167c5b3a";
