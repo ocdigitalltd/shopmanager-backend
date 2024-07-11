@@ -6,7 +6,9 @@ abstract class prodEnv extends CfgDevelopmentEnv {
   static allowedOrigins = [
     "http://shop-manager.schedy.app/",
     "https://shop-manager.schedy.app/",
-    "https://shop-manager.schedy.app"
+    "https://shop-manager.schedy.app",
+    "https://shopmanager.in1.cloudjiffy.net/",
+    "https://shopmanager.in1.cloudjiffy.net"
   ];
 
   static MAP_API_TOKEN = "651d156bca96aa7a167c5b3a";
