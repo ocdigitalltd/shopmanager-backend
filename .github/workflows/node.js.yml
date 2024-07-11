@@ -25,7 +25,7 @@ jobs:
     - name: Build the project
       run: npm run build
 
-    - name: Deploy to CloudJiffy
+    - name: Debug SSH Connection
       env:
         SSH_PRIVATE_KEY: ${{ secrets.SSH_KEY }}
         CLOUDJIFFY_USERNAME: ${{ secrets.SSH_USERNAME }}
@@ -35,5 +35,18 @@ jobs:
         echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
         chmod 600 ~/.ssh/id_rsa
         ssh-keyscan $CLOUDJIFFY_HOST >> ~/.ssh/known_hosts
+        ssh -v $CLOUDJIFFY_USERNAME@$CLOUDJIFFY_HOST "echo 'SSH connection successful'"
+
+    - name: Deploy to CloudJiffy
+      env:
+        SSH_PRIVATE_KEY: ${{ secrets.SSH_KEY }}
+        CLOUDJIFFY_USERNAME: ${{ secrets.SSH_USERNAME }}
+        CLOUDJIFFY_HOST: ${{ secrets.SSH_HOST }}
+      run: |
         scp -r ./dist $CLOUDJIFFY_USERNAME@$CLOUDJIFFY_HOST:/home/jelastic/ROOT
-        ssh $CLOUDJIFFY_USERNAME@$CLOUDJIFFY_HOST "cd /home/jelastic/ROOT && npm install && NODE_OPTIONS='--max-old-space-size=4096' pm2 restart npm --name 'nodejs-parsing-tool' -- run prod"
+        ssh $CLOUDJIFFY_USERNAME@$CLOUDJIFFY_HOST "
+          cd /home/jelastic/ROOT &&
+          echo 'In the project directory' &&
+          npm install &&
+          NODE_OPTIONS='--max-old-space-size=4096' pm2 restart npm --name 'nodejs-parsing-tool' -- run prod
+        "
