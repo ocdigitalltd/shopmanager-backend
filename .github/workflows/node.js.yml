@@ -35,5 +35,5 @@ jobs:
         echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
         chmod 600 ~/.ssh/id_rsa
         ssh-keyscan $CLOUDJIFFY_HOST >> ~/.ssh/known_hosts
-        scp -r ./dist $CLOUDJIFFY_USERNAME@$CLOUDJIFFY_HOST:/home/jelastic/your-app-directory
-        ssh $CLOUDJIFFY_USERNAME@$CLOUDJIFFY_HOST "cd /home/jelastic/your-app-directory && npm install && NODE_OPTIONS='--max-old-space-size=4096' pm2 restart npm --name 'your-app-name' -- run prod"
+        scp -r ./dist $CLOUDJIFFY_USERNAME@$CLOUDJIFFY_HOST:/home/jelastic/ROOT
+        ssh $CLOUDJIFFY_USERNAME@$CLOUDJIFFY_HOST "cd /home/jelastic/ROOT && npm install && NODE_OPTIONS='--max-old-space-size=4096' pm2 restart npm --name 'nodejs-parsing-tool' -- run prod"
