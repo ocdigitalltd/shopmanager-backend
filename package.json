@@ -4,6 +4,7 @@
   "description": "",
   "main": "dist/app.js",
   "scripts": {
+    "build": "tsc",
     "dev": "cross-env NODE_ENV=development NODE_PATH=. nodemon --config nodemon.json src/app.ts",
     "prod": "tsc && cross-env NODE_ENV=production NODE_PATH=. node dist/app.js",
     "pgDatabaseReset": "npm run pgDatabaseRollback && npm run pgDatabaseMigrations && npm run pgDatabaseSeeds",
