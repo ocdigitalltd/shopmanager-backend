@@ -29,9 +29,10 @@ jobs:
       env:
         CLOUDJIFFY_USERNAME: ${{ secrets.SSH_USERNAME }}
         CLOUDJIFFY_HOST: ${{ secrets.SSH_HOST }}
+        SSH_PORT: ${{ secrets.SSH_PORT }}  # Replace with your actual secret name
       run: |
         scp -r ./dist $CLOUDJIFFY_USERNAME@$CLOUDJIFFY_HOST:/home/jelastic/ROOT
-        ssh $CLOUDJIFFY_USERNAME@$CLOUDJIFFY_HOST "
+        ssh -p $SSH_PORT $CLOUDJIFFY_USERNAME@$CLOUDJIFFY_HOST "
           cd /home/jelastic/ROOT &&
           npm install &&
           NODE_OPTIONS='--max-old-space-size=4096' pm2 restart npm --name 'nodejs-parsing-tool' -- run prod
