@@ -1,0 +1,39 @@
+name: Deploy to CloudJiffy
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '18.17.0'
+
+    - name: Install dependencies
+      run: npm install
+
+    - name: Build the project
+      run: npm run build
+
+    - name: Deploy to CloudJiffy
+      env:
+        SSH_PRIVATE_KEY: ${{ secrets.SSH_KEY }}
+        CLOUDJIFFY_USERNAME: ${{ secrets.SSH_USERNAME }}
+        CLOUDJIFFY_HOST: ${{ secrets.SSH_HOST }}
+      run: |
+        mkdir -p ~/.ssh
+        echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
+        chmod 600 ~/.ssh/id_rsa
+        ssh-keyscan $CLOUDJIFFY_HOST >> ~/.ssh/known_hosts
+        scp -r ./dist $CLOUDJIFFY_USERNAME@$CLOUDJIFFY_HOST:/home/jelastic/your-app-directory
+        ssh $CLOUDJIFFY_USERNAME@$CLOUDJIFFY_HOST "cd /home/jelastic/your-app-directory && npm install && NODE_OPTIONS='--max-old-space-size=4096' pm2 restart npm --name 'your-app-name' -- run prod"
