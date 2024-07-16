@@ -29,9 +29,9 @@ jobs:
       env:
         CLOUDJIFFY_USERNAME: ${{ secrets.SSH_USERNAME }}
         CLOUDJIFFY_HOST: ${{ secrets.SSH_HOST }}
-        SSH_PORT: ${{ secrets.SSH_PORT }}  # Replace with your actual secret name
+        SSH_PORT: ${{ secrets.SSH_PORT }}
       run: |
-        scp -r ./dist $CLOUDJIFFY_USERNAME@$CLOUDJIFFY_HOST:/home/jelastic/ROOT
+        scp -P $SSH_PORT -r ./dist $CLOUDJIFFY_USERNAME@$CLOUDJIFFY_HOST:/home/jelastic/ROOT
         ssh -p $SSH_PORT $CLOUDJIFFY_USERNAME@$CLOUDJIFFY_HOST "
           cd /home/jelastic/ROOT &&
           npm install &&
