@@ -27,7 +27,7 @@ jobs:
 
     - name: Deploy to CloudJiffy
       env:
-        SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+        SSH_PRIVATE_KEY: ${{ secrets.SSH_KEY }}
         CLOUDJIFFY_USERNAME: ${{ secrets.SSH_USERNAME }}
         CLOUDJIFFY_HOST: ${{ secrets.SSH_HOST }}
         SSH_PORT: ${{ secrets.SSH_PORT }}
