@@ -29,7 +29,7 @@ jobs:
       env:
         CLOUDJIFFY_USERNAME: ${{ secrets.SSH_USERNAME }}
         CLOUDJIFFY_HOST: ${{ secrets.SSH_HOST }}
-        SSH_PORT: 3022  # Replace with your actual secret name
+        SSH_PORT: ${{ secrets.SSH_PORT }}  # Replace with your actual secret name
       run: |
         scp -r ./dist $CLOUDJIFFY_USERNAME@$CLOUDJIFFY_HOST:/home/jelastic/ROOT
         ssh -p $SSH_PORT $CLOUDJIFFY_USERNAME@$CLOUDJIFFY_HOST "
