@@ -27,7 +27,7 @@ jobs:
 
     - name: Deploy to CloudJiffy
       env:
-        SSH_PRIVATE_KEY: ${{ secrets.SSH_KEY }}
+        SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
         CLOUDJIFFY_USERNAME: ${{ secrets.SSH_USERNAME }}
         CLOUDJIFFY_HOST: ${{ secrets.SSH_HOST }}
         SSH_PORT: ${{ secrets.SSH_PORT }}
@@ -36,6 +36,8 @@ jobs:
         echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
         chmod 600 ~/.ssh/id_rsa
         ssh-keyscan -p $SSH_PORT $CLOUDJIFFY_HOST >> ~/.ssh/known_hosts
+        cat ~/.ssh/id_rsa  # Debugging: Show the private key (ensure it looks correct)
+        cat ~/.ssh/known_hosts  # Debugging: Show the contents of the known_hosts file
         scp -v -P $SSH_PORT -r ./dist $CLOUDJIFFY_USERNAME@$CLOUDJIFFY_HOST:/home/jelastic/ROOT
         ssh -v -p $SSH_PORT $CLOUDJIFFY_USERNAME@$CLOUDJIFFY_HOST "
           cd /home/jelastic/ROOT &&
