@@ -27,16 +27,17 @@ jobs:
 
     - name: Deploy to CloudJiffy
       env:
+        SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
         CLOUDJIFFY_USERNAME: ${{ secrets.SSH_USERNAME }}
         CLOUDJIFFY_HOST: ${{ secrets.SSH_HOST }}
-        SSH_PORT: ${{ secrets.SSH_PORT }}  
+        SSH_PORT: ${{ secrets.SSH_PORT }}
       run: |
         mkdir -p ~/.ssh
         echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
         chmod 600 ~/.ssh/id_rsa
         ssh-keyscan -p $SSH_PORT $CLOUDJIFFY_HOST >> ~/.ssh/known_hosts
-        scp -P $SSH_PORT -r ./dist $CLOUDJIFFY_USERNAME@$CLOUDJIFFY_HOST:/home/jelastic/ROOT
-        ssh -p $SSH_PORT $CLOUDJIFFY_USERNAME@$CLOUDJIFFY_HOST "
+        scp -v -P $SSH_PORT -r ./dist $CLOUDJIFFY_USERNAME@$CLOUDJIFFY_HOST:/home/jelastic/ROOT
+        ssh -v -p $SSH_PORT $CLOUDJIFFY_USERNAME@$CLOUDJIFFY_HOST "
           cd /home/jelastic/ROOT &&
           npm install &&
           NODE_OPTIONS='--max-old-space-size=4096' pm2 restart npm --name 'nodejs-parsing-tool' -- run prod
