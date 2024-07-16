@@ -2,37 +2,45 @@ name: Deploy to CloudJiffy
 
 on:
   push:
-    branches:
-      - main
+    branches: [main]
+  pull_request:
+    branches: [main]
 
 jobs:
-  deploy:
+  build-and-deploy:
     runs-on: ubuntu-latest
 
     steps:
     - name: Checkout code
-      uses: actions/checkout@v2
+      uses: actions/checkout@v4
 
-    - name: Set up SSH
-      run: |
-        mkdir -p ~/.ssh
-        echo "${{ secrets.SSH_KEY }}" > ~/.ssh/id_rsa
-        chmod 600 ~/.ssh/id_rsa
-        ssh-keyscan -p $SSH_PORT $CLOUDJIFFY_HOST >> ~/.ssh/known_hosts
-      env:
-        SSH_PRIVATE_KEY: ${{ secrets.SSH_KEY }}
-        SSH_PORT: ${{ secrets.SSH_PORT }}
-        CLOUDJIFFY_HOST: ${{ secrets.SSH_HOST }}
+    - name: Set up Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '18.17.0'
+
+    - name: Install dependencies
+      run: npm install
+
+    - name: Build the project
+      run: npm run build
 
     - name: Deploy to CloudJiffy
+      env:
+        SSH_PRIVATE_KEY: ${{ secrets.SSH_KEY }}
+        CLOUDJIFFY_USERNAME: ${{ secrets.SSH_USERNAME }}
+        CLOUDJIFFY_HOST: ${{ secrets.SSH_HOST }}
+        SSH_PORT: ${{ secrets.SSH_PORT }}
       run: |
+        mkdir -p ~/.ssh
+        echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
+        chmod 600 ~/.ssh/id_rsa
+        ssh-keyscan -p $SSH_PORT $CLOUDJIFFY_HOST >> ~/.ssh/known_hosts
+        cat ~/.ssh/id_rsa  # Debugging: Show the private key (ensure it looks correct)
+        cat ~/.ssh/known_hosts  # Debugging: Show the contents of the known_hosts file
         scp -v -P $SSH_PORT -r ./dist $CLOUDJIFFY_USERNAME@$CLOUDJIFFY_HOST:/home/jelastic/ROOT
         ssh -v -p $SSH_PORT $CLOUDJIFFY_USERNAME@$CLOUDJIFFY_HOST "
           cd /home/jelastic/ROOT &&
           npm install &&
           NODE_OPTIONS='--max-old-space-size=4096' pm2 restart npm --name 'nodejs-parsing-tool' -- run prod
         "
-      env:
-        SSH_PORT: ${{ secrets.SSH_PORT }}
-        CLOUDJIFFY_HOST: ${{ secrets.SSH_HOST }}
-        CLOUDJIFFY_USERNAME: ${{ secrets.SSH_USERNAME }}
