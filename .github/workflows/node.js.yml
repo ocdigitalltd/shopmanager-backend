@@ -27,18 +27,18 @@ jobs:
 
     - name: Deploy to CloudJiffy
       env:
-        SSH_PRIVATE_KEY: ${{ secrets.SSH_KEY }}
+        SSH_KEY_BASE64: ${{ secrets.SSH_KEY_BASE64 }}
         CLOUDJIFFY_USERNAME: ${{ secrets.SSH_USERNAME }}
         CLOUDJIFFY_HOST: ${{ secrets.SSH_HOST }}
         SSH_PORT: ${{ secrets.SSH_PORT }}
       run: |
         mkdir -p ~/.ssh
-        echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
+        echo "$SSH_KEY_BASE64" | base64 --decode > ~/.ssh/id_rsa
         chmod 600 ~/.ssh/id_rsa
         ssh-keyscan -p $SSH_PORT $CLOUDJIFFY_HOST >> ~/.ssh/known_hosts
         cat ~/.ssh/id_rsa  # Debugging: Show the private key (ensure it looks correct)
         cat ~/.ssh/known_hosts  # Debugging: Show the contents of the known_hosts file
-        
+
         # SSH into the server to remove existing project files
         ssh -v -p $SSH_PORT $CLOUDJIFFY_USERNAME@$CLOUDJIFFY_HOST <<EOF
           rm -rf /home/jelastic/ROOT/*
@@ -51,7 +51,7 @@ jobs:
         put package-lock.json /home/jelastic/ROOT
         put forever.json /home/jelastic/ROOT
         EOF
-        
+
         # SSH into the server and perform post-deployment actions
         ssh -v -p $SSH_PORT $CLOUDJIFFY_USERNAME@$CLOUDJIFFY_HOST <<EOF
           cd ROOT &&
