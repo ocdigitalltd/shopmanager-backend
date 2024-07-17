@@ -120,3 +120,4 @@ dist
 .npmrc-template
 tsdist/*
 /assets/theme/css/
+deploy
